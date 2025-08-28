@@ -1,0 +1,60 @@
+@import url('./main.css');
+
+/* 페이지 여백 & 카드 폭 */
+.auth { padding: 32px 0 64px; }
+.card { max-width: 760px; margin: 0 auto; }
+
+/* ===== 비밀번호 강도 미터 (텍스트 포함, 100% 꽉 차도록) ===== */
+.meter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.meter-text {
+  color: var(--muted);
+  font-size: .9rem;
+  min-width: 6ch;
+  text-align: right;
+}
+.meter {
+  height: 8px;
+  border-radius: 999px;
+  background: #0e1420;
+  border: 1px solid var(--outline);
+  position: relative;
+  overflow: hidden;
+}
+.meter::after {
+  content: "";
+  position: absolute;
+  /* border(1px) 내부를 정확히 채우도록 inset */
+  left: 1px; right: 1px; top: 1px; bottom: 1px;
+  background: linear-gradient(90deg, #ff6b6b, #ffd166, #6cff99);
+  transform: scaleX(0);                /* 0~1 사이로 채움 */
+  transform-origin: left center;
+  transition: transform .25s ease;
+  border-radius: 999px;
+}
+/* 점수별 채움 비율 */
+.meter[data-strength="0"]::after { transform: scaleX(0);   }
+.meter[data-strength="1"]::after { transform: scaleX(.25); }
+.meter[data-strength="2"]::after { transform: scaleX(.5);  }
+.meter[data-strength="3"]::after { transform: scaleX(.75); }
+.meter[data-strength="4"]::after { transform: scaleX(1);   }
+
+/* ===== 비밀번호 일치/불일치 메시지 ===== */
+.ok {
+  color: #6cff99;           /* 일치: 초록 */
+  min-height: 1.2em;        /* 레이아웃 흔들림 방지 (error와 동일 라인 높이) */
+}
+/* 불일치 시 입력창 강조 (선택) */
+input[aria-invalid="true"] {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, .15);
+}
+
+/* ===== 주소 행 모바일 대응 ===== */
+.address .row { display: flex; gap: 10px; }
+.address .row input { flex: 1; }
+@media (max-width: 480px) { .address .row { flex-direction: column; } }
