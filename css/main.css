@@ -16,6 +16,7 @@ font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-se
 color: var(--text);
 background: linear-gradient(180deg, #0b0e13 0%, #0f1115 100%);
 }
+a{color: inherit;text-decoration: none;}
 
 
 .container { width: min(1100px, 92%); margin: 0 auto; }
